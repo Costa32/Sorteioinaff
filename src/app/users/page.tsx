@@ -1,8 +1,7 @@
-// app/users/page.tsx (ou pages/users.tsx para Pages Router)
-'use client'; // Necessário para componentes interativos no App Router
+'use client';
 
 import { useState, useEffect } from 'react';
-import { User } from '@/interfaces/User'; // Importe a interface que criamos
+import { User } from '@/interfaces/User';
 
 export default function UsersListPage() {
   const [users, setUsers] = useState<User[]>([]);
@@ -17,7 +16,6 @@ export default function UsersListPage() {
       setError(null);
       try {
         let url = '/api/users';
-        // Se houver termo de busca, adiciona aos parâmetros da URL
         if (searchTerm) {
           url += `?${searchBy}=${encodeURIComponent(searchTerm)}`;
         }
@@ -29,15 +27,16 @@ export default function UsersListPage() {
         }
         const data: User[] = await response.json();
         setUsers(data);
-      } catch (err: any) {
-        setError(err.message || 'Ocorreu um erro desconhecido.');
+      } catch (err: unknown) {
+        const error = err instanceof Error ? err.message : 'Ocorreu um erro desconhecido.';
+        setError(error);
       } finally {
         setLoading(false);
       }
     };
 
     fetchUsers();
-  }, [searchTerm, searchBy]); // Refaz a busca quando searchTerm ou searchBy mudam
+  }, [searchTerm, searchBy]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
@@ -99,7 +98,6 @@ export default function UsersListPage() {
               <th style={tableHeaderStyle}>CPF</th>
               <th style={tableHeaderStyle}>Celular</th>
               <th style={tableHeaderStyle}>Instituição</th>
-              {/* Adicione mais colunas conforme necessário */}
             </tr>
           </thead>
           <tbody>
@@ -111,7 +109,6 @@ export default function UsersListPage() {
                 <td style={tableCellStyle}>{user.cpf}</td>
                 <td style={tableCellStyle}>{user.cellphone || 'N/A'}</td>
                 <td style={tableCellStyle}>{user.institution || 'N/A'}</td>
-                {/* Renderize mais dados aqui */}
               </tr>
             ))}
           </tbody>
@@ -123,12 +120,12 @@ export default function UsersListPage() {
 
 const tableHeaderStyle = {
   padding: '12px',
-  textAlign: 'left',
+  textAlign: 'left' as const,
   borderBottom: '1px solid #ddd',
 };
 
 const tableCellStyle = {
   padding: '12px',
-  textAlign: 'left',
+  textAlign: 'left' as const,
   borderBottom: '1px solid #ddd',
 };

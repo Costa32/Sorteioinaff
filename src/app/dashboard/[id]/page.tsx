@@ -2,7 +2,15 @@
 "use client";
 
 import Image from "next/image";
-import { Button, Flex, Text, Spinner, Box, Grid, Table, Thead, Tbody, Tr, Th, Td, Link, Icon } from "@chakra-ui/react";
+import { Box, Button, Flex, Grid, Icon, Link, Spinner, Text } from "@chakra-ui/react";
+import {
+    Table,
+    Thead,
+    Tbody,
+    Tr,
+    Th,
+    Td,
+} from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useParams } from 'next/navigation';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from 'recharts';
@@ -220,7 +228,7 @@ export default function Dashboard() {
                                                     <Td>{participant.email}</Td>
                                                     <Td>{participant.cellphone}</Td>
                                                     <Td>{participant.state}</Td>
-                                                    <Td>{participant.institution}</Td>
+                                                    <Td>{participant.institution || 'N/A'}</Td>
                                                 </Tr>
                                             ))}
                                         </Tbody>
