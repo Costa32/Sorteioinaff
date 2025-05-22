@@ -4,13 +4,15 @@
 import Image from "next/image";
 import { Box, Button, Flex, Grid, Icon, Link, Spinner, Text } from "@chakra-ui/react";
 import {
+    TableContainer,
     Table,
+    TableCaption,
     Thead,
     Tbody,
     Tr,
     Th,
     Td,
-} from "@chakra-ui/react";
+} from "@chakra-ui/table";
 import { useEffect, useState } from "react";
 import { useParams } from 'next/navigation';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from 'recharts';
@@ -172,24 +174,26 @@ export default function Dashboard() {
                                     <Text color="#517C22" fontSize="lg" fontWeight="bold" mb={2}>
                                         Histórico de Sorteios
                                     </Text>
-                                    <Table variant="simple" size="sm">
-                                        <Thead>
-                                            <Tr>
-                                                <Th>Número</Th>
-                                                <Th>Participante</Th>
-                                                <Th>Data/Hora</Th>
-                                            </Tr>
-                                        </Thead>
-                                        <Tbody>
-                                            {sortedHistory.map((item, index) => (
-                                                <Tr key={index}>
-                                                    <Td>{item.draw_number}</Td>
-                                                    <Td>{item.name}</Td>
-                                                    <Td>{new Date().toLocaleString()}</Td>
+                                    <TableContainer>
+                                        <Table variant="simple" size="sm">
+                                            <Thead>
+                                                <Tr>
+                                                    <Th>Número</Th>
+                                                    <Th>Participante</Th>
+                                                    <Th>Data/Hora</Th>
                                                 </Tr>
-                                            ))}
-                                        </Tbody>
-                                    </Table>
+                                            </Thead>
+                                            <Tbody>
+                                                {sortedHistory.map((item, index) => (
+                                                    <Tr key={index}>
+                                                        <Td>{item.draw_number}</Td>
+                                                        <Td>{item.name}</Td>
+                                                        <Td>{new Date().toLocaleString()}</Td>
+                                                    </Tr>
+                                                ))}
+                                            </Tbody>
+                                        </Table>
+                                    </TableContainer>
                                 </Box>
                             )}
                         </Box>
@@ -211,28 +215,30 @@ export default function Dashboard() {
 
                             {showParticipants && (
                                 <Box overflowX="auto">
-                                    <Table variant="simple" size="sm">
-                                        <Thead>
-                                            <Tr>
-                                                <Th>Nome</Th>
-                                                <Th>Email</Th>
-                                                <Th>Telefone</Th>
-                                                <Th>Estado</Th>
-                                                <Th>Instituição</Th>
-                                            </Tr>
-                                        </Thead>
-                                        <Tbody>
-                                            {participants.map((participant) => (
-                                                <Tr key={participant.id}>
-                                                    <Td>{`${participant.name} ${participant.last_name}`}</Td>
-                                                    <Td>{participant.email}</Td>
-                                                    <Td>{participant.cellphone}</Td>
-                                                    <Td>{participant.state}</Td>
-                                                    <Td>{participant.institution || 'N/A'}</Td>
+                                    <TableContainer>
+                                        <Table variant="simple" size="sm">
+                                            <Thead>
+                                                <Tr>
+                                                    <Th>Nome</Th>
+                                                    <Th>Email</Th>
+                                                    <Th>Telefone</Th>
+                                                    <Th>Estado</Th>
+                                                    <Th>Instituição</Th>
                                                 </Tr>
-                                            ))}
-                                        </Tbody>
-                                    </Table>
+                                            </Thead>
+                                            <Tbody>
+                                                {participants.map((participant) => (
+                                                    <Tr key={participant.id}>
+                                                        <Td>{`${participant.name} ${participant.last_name}`}</Td>
+                                                        <Td>{participant.email}</Td>
+                                                        <Td>{participant.cellphone}</Td>
+                                                        <Td>{participant.state}</Td>
+                                                        <Td>{participant.institution || 'N/A'}</Td>
+                                                    </Tr>
+                                                ))}
+                                            </Tbody>
+                                        </Table>
+                                    </TableContainer>
                                 </Box>
                             )}
                         </Box>
