@@ -2,7 +2,7 @@
 "use client";
 
 import Image from "next/image";
-import { Box, Button, Flex, Grid, Icon, Link, Spinner, Text, TableContainer, Table, TableCaption, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
+import { Box, Button, Flex, Grid, Icon, Link, Spinner, Text, Table, Tbody, Tr, Th, Td, TableContainer, Thead } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useParams } from 'next/navigation';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from 'recharts';
